@@ -1,0 +1,62 @@
+.header {
+    color: white;
+    
+    .main {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 1330px;
+        height: 90px;
+        margin: auto;
+        padding: 15px;
+
+        .social__links {
+            display: flex;
+            align-items: center;
+            max-width: calc(100% / 3);
+            width: 100%;
+
+            a {
+                margin-left: 5px;
+                user-select: none;
+            }
+
+            a:first-child {
+                margin-left: 0;
+            }
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            max-width: calc(100% / 3);
+            width: 100%;
+            font-size: 30px;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .mail, .mobile__mail {
+            display: flex;
+            justify-content: flex-end;
+            max-width: calc(100% / 3);
+            width: 100%;
+            color: #b7bdc2;
+        }
+
+        .mobile__mail{
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 425px) { 
+    .mail{
+        display: none !important;
+    }
+
+    .mobile__mail{
+        display: flex !important;
+    }
+}
