@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from 'components/header/header';
 import Footer from 'components/footer/footer';
 import { tabs } from './api/tabs';
@@ -6,6 +6,15 @@ import { motion } from 'framer-motion';
 
 const Home = () => {
 	const [[page], setPage] = useState([0, 0]);
+
+	useEffect(() => {
+		setPage(JSON.parse(localStorage.getItem('page number')));
+		console.log(JSON.parse(localStorage.getItem('page number')));
+	}, [])
+	
+	useEffect(() => {
+		localStorage.setItem('page number', JSON.stringify([page]));
+	}, [page])
 
 	return (
 		<motion.div initial="hidden" whileInView="visible" translate="no">
