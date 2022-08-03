@@ -8,7 +8,7 @@ const Home = () => {
 	const [[page], setPage] = useState([0, 0]);
 
 	return (
-		<motion.div initial="hidden" whileInView="visible">
+		<motion.div initial="hidden" whileInView="visible" translate="no">
 
 			<Header />
 
