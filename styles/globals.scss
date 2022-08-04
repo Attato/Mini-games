@@ -35,4 +35,14 @@ h1 {
 	color: white;
 	font-weight: 400;
 	font-size: 42px;
+	margin-bottom: 30px;
+	user-select: none;
+	text-align: center;
 }
+
+@media screen and (max-width: 425px) {
+    
+	h1 {
+		font-size: 30px;
+	}
+ }

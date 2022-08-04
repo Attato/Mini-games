@@ -24,8 +24,9 @@ const Snake = (
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 
+		<h1>Snake</h1>
 		<div className="body" key={Date.now()}>
-			<h1>Snake</h1>
+			
 		</div>
 	</>
 );
@@ -37,21 +38,25 @@ const Chess = (
 			<meta name="description" content="" />
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
+
+		<h1>Chess</h1>
 		<div className="body" key={Date.now()}>
-			<h1>Chess</h1>
+
 		</div>
 	</>
 );
 
 const BossFight = (
 	<>
+		<Head>
+			<title>Boss fight</title>
+			<meta name="description" content="" />
+			<link rel="icon" href="/favicon.ico" />
+		</Head>
+
+		<h1>Boss fight</h1>
 		<div className="body" key={Date.now()}>
-			<Head>
-				<title>Boss fight</title>
-				<meta name="description" content="" />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
-			<h1>Boss fight</h1>
+
 		</div>
 	</>
 );
