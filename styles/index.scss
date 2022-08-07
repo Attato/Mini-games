@@ -65,7 +65,7 @@
 
     .memory {
         display: grid;
-        grid-template-columns: repeat(4, 75px);
+        grid-template-columns: repeat(5, 75px);
         gap: 8px;
         margin-bottom: 30px;
 
@@ -76,6 +76,7 @@
             transition: all .2s;
             transform: rotateY(0deg);
             user-select: none;
+            cursor: pointer;
 
             .card__front, .card__back {
                 position: absolute;
@@ -110,15 +111,26 @@
     .menu {
         display: flex;
         justify-content: space-around;
-        max-width: 324px;
+        max-width: 407px;
         width: 100%;
 
         p {
             color: #b7bdc2;
+            width: 100%;
         }
 
         button {
-            padding: 0 30px;
+            padding: 0 40px;
+            height: 40px;
+        }
+
+        .disabled__btn {
+
+            &:hover {
+                color: #767676;
+                background-color: #17191c;
+                cursor: not-allowed;
+            }
         }
     }
 }

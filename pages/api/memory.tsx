@@ -18,7 +18,7 @@ const Memory = () => {
         }
     }, [moves])
 
-    const boardIcons = ["🦒", "🦣", "🦬", "🦌", "🐏", "🦭", "🐆", "🦔"]
+    const boardIcons = ["🦒", "🦣", "🦬", "🦌", "🐏", "🦭", "🐆", "🦔", "🦅", "🦈"]
     const shuffle = () => {
         const shuffledCards = [...boardIcons, ...boardIcons]
             .sort(() => Math.random() - 0.5)
@@ -54,7 +54,7 @@ const Memory = () => {
             } else {
                 setFlippedCards([...flippedCards, idx])            
             }
-            
+
             setMoves((prev) => prev + 1)
         }
     }
@@ -87,7 +87,8 @@ const Memory = () => {
                 <button 
                     onClick={() => initialize()}
                     disabled={!gameOver}
-                >
+                    className={gameOver ? "" : "disabled__btn"}
+                    >
                     Reset
                 </button>
             </div>
