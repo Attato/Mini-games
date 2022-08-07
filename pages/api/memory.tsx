@@ -12,6 +12,12 @@ const Memory = () => {
         initialize();
     }, []);
 
+    useEffect(() => {
+        if (foundCards.length > 0 && foundCards.length == boardData.length) {
+            setGameOver(true);
+        }
+    }, [moves])
+
     const boardIcons = ["🦒", "🦣", "🦬", "🦌", "🐏", "🦭", "🐆", "🦔"]
     const shuffle = () => {
         const shuffledCards = [...boardIcons, ...boardIcons]
@@ -40,7 +46,7 @@ const Memory = () => {
                     setFoundCards([...foundCards, firstIdx, secondIdx])
                 }
 
-                setFlippedCards([idx])
+                setFlippedCards([...flippedCards, idx])  
             }
 
             else if (flippedCards.length == 2) {
@@ -48,7 +54,7 @@ const Memory = () => {
             } else {
                 setFlippedCards([...flippedCards, idx])            
             }
-
+            
             setMoves((prev) => prev + 1)
         }
     }
@@ -78,7 +84,12 @@ const Memory = () => {
             
             <div className="menu">
                 <p>Moves: {moves}</p>
-                <button onClick={() => initialize()}>Reset</button>
+                <button 
+                    onClick={() => initialize()}
+                    disabled={!gameOver}
+                >
+                    Reset
+                </button>
             </div>
         </>
     );
