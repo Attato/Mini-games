@@ -48,29 +48,39 @@ const Memory = () => {
             } else {
                 setFlippedCards([...flippedCards, idx])            
             }
+
+            setMoves((prev) => prev + 1)
         }
     }
 
     return(
-        <div className="memory">
-            { boardData.map((data, idx) => {
+        <>
+            <div className="memory">
+                { boardData.map((data, idx) => {
 
-                const flipped = flippedCards.includes(idx)
-                ? "flipped" : "";
-                const found = foundCards.includes(idx)
-                ? "flipped found" : "";
-                return (
-                    <div 
-                        key={idx} 
-                        className={`card ${flipped} ${found}`}
-                        onClick={() => updateBoardData(idx)}
-                    >
-                        <div className="card__front">{data}</div>
-                        <div className="card__back"></div>
-                    </div>
-                );
-            })}
-        </div>
+                    const flipped = flippedCards.includes(idx)
+                    ? "flipped" : "";
+                    const found = foundCards.includes(idx)
+                    ? "flipped found" : "";
+
+                    return (
+                        <div 
+                            key={idx} 
+                            className={`card ${flipped} ${found}`}
+                            onClick={() => updateBoardData(idx)}
+                        >
+                            <div className="card__front">{data}</div>
+                            <div className="card__back"></div>
+                        </div>
+                    );
+                })}
+            </div>
+            
+            <div className="menu">
+                <p>Moves: {moves}</p>
+                <button onClick={() => initialize()}>Reset</button>
+            </div>
+        </>
     );
 }
 

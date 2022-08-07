@@ -67,6 +67,7 @@
         display: grid;
         grid-template-columns: repeat(4, 75px);
         gap: 8px;
+        margin-bottom: 30px;
 
         .card {
             height: 75px;
@@ -103,6 +104,21 @@
 
         .card.found .card__front {
             background-color: aquamarine;
+        }
+
+    }
+    .menu {
+        display: flex;
+        justify-content: space-around;
+        max-width: 324px;
+        width: 100%;
+
+        p {
+            color: #b7bdc2;
+        }
+
+        button {
+            padding: 0 30px;
         }
     }
 }
