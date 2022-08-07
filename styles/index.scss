@@ -77,8 +77,11 @@
             transform: rotateY(0deg);
             user-select: none;
             cursor: pointer;
-
+            
             .card__front, .card__back {
+                display: flex;
+                justify-content: center;
+                align-items: baseline;
                 position: absolute;
                 left: 0;
                 top: 0;
@@ -91,7 +94,6 @@
             .card__front {
                 z-index: 2;
                 font-size: 50px;
-                line-height: 75px;
                 vertical-align: middle;
                 text-align: center;
                 transform: rotateY(180deg);
@@ -141,6 +143,15 @@
 
         .card {
             height: 60px !important;
+
+            .card__front, .card__back {
+                align-items: center !important;
+            }
+
+            .card__front {
+                font-size: 40px !important;
+                line-height: 0 !important;
+            }
         }
     }
 
@@ -149,12 +160,16 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
     .memory {
         grid-template-columns: repeat(5, 50px) !important;
 
         .card {
             height: 50px !important;
+
+            .card__front {
+                font-size: 30px !important;
+            }
         }
     }
 
