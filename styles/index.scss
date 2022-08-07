@@ -134,3 +134,31 @@
         }
     }
 }
+
+@media screen and (max-width: 425px) {
+    .memory {
+        grid-template-columns: repeat(5, 60px) !important;
+
+        .card {
+            height: 60px !important;
+        }
+    }
+
+    .menu {
+        max-width: 332px !important;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .memory {
+        grid-template-columns: repeat(5, 50px) !important;
+
+        .card {
+            height: 50px !important;
+        }
+    }
+
+    .menu {
+        max-width: 282px !important;
+    }
+}
