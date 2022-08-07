@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import Memory from './memory';
 
 const MemoryGame = (
 	<>
@@ -11,7 +12,7 @@ const MemoryGame = (
 
 		<h1>Memory Game</h1>
 		<div className="body" key={Date.now()}>
-
+			<Memory/>
 		</div>
 	</>
 );
@@ -26,7 +27,7 @@ const Snake = (
 
 		<h1>Snake</h1>
 		<div className="body" key={Date.now()}>
-			
+
 		</div>
 	</>
 );

@@ -18,8 +18,41 @@ a {
 	text-decoration: none;
 }
 
-button {
+button, input {
 	font-family: 'Josefin Sans', sans-serif;
+}
+
+button {
+	background-color: #17191c;
+	color: #767676;
+	border: none;
+	border-radius: 6px;
+	font-size: 16px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #1a1d20;
+		color: #8b8a8a;
+	}
+
+	&:active {
+		background-color: #1d2024; 
+		color: #ababab;
+	}
+
+	&:focus-visible {
+		outline: none;
+	}
+}
+
+input {
+	&::placeholder {
+		color: white;
+	}
+
+	&:focus-visible {
+		outline: none;
+	}
 }
 
 h1,
