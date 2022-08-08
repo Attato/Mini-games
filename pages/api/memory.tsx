@@ -83,7 +83,7 @@ const Memory = () => {
             </div>
             
             <div className="menu">
-                <p>Moves: {moves}</p>
+                <span>Moves: {moves}</span>
                 <button 
                     onClick={() => initialize()}
                     disabled={!gameOver}
