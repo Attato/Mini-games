@@ -64,77 +64,121 @@
     }
 
     .memory {
-        display: grid;
-        grid-template-columns: repeat(5, 75px);
-        gap: 8px;
-        margin-bottom: 30px;
+        
+        .board {
+            display: grid;
+            grid-template-columns: repeat(5, 75px);
+            gap: 8px;
+            margin-bottom: 30px;
 
-        .card {
-            height: 75px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: all .2s;
-            transform: rotateY(0deg);
-            user-select: none;
-            cursor: pointer;
+            .card {
+                height: 75px;
+                position: relative;
+                transform-style: preserve-3d;
+                transition: all .2s;
+                transform: rotateY(0deg);
+                user-select: none;
+                cursor: pointer;
+                
+                .card__front, .card__back {
+                    display: flex;
+                    justify-content: center;
+                    align-items: baseline;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 10px;
+                }
+                
+                .card__back {
+                    background-color: #17191c;                  
+                }
+
+                .card__front {
+                    z-index: 2;
+                    font-size: 50px;
+                    vertical-align: middle;
+                    text-align: center;
+                    background-color: #2e2e34;   
+                    transform: rotateY(180deg);
+                    backface-visibility: hidden;
+                }
+            }
             
-            .card__front, .card__back {
-                display: flex;
-                justify-content: center;
-                align-items: baseline;
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                background-color: #eee;
-                border-radius: 50%;
-            }
-        
-            .card__front {
-                z-index: 2;
-                font-size: 50px;
-                vertical-align: middle;
-                text-align: center;
+            .card.flipped {
                 transform: rotateY(180deg);
-                backface-visibility: hidden;
+            }
+    
+            .card.found .card__front {
+                background-color: #446446;
             }
         }
-        
-        .card.flipped {
-            transform: rotateY(180deg);
-        }
 
-        .card.found .card__front {
-            background-color: aquamarine;
-        }
-
-    }
-    .menu {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        max-width: 407px;
-        width: 100%;
-
-        span {
-            color: #b7bdc2;
-        }
-
-        button {
-            padding: 0 40px;
-            height: 40px;
-        }
-
-        .disabled__btn {
-
-            &:hover {
-                color: #767676;
-                background-color: #17191c;
-                cursor: not-allowed;
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 407px;
+            width: 100%;
+    
+            span {
+                color: #b7bdc2;
+            }
+    
+            button {
+                padding: 0 40px;
+                height: 40px;
+            }
+    
+            .disabled__btn {
+    
+                &:hover {
+                    color: #767676;
+                    background-color: #17191c;
+                    cursor: not-allowed;
+                }
             }
         }
     }
+
+
+    .snake {
+
+        canvas {
+            margin-bottom: 30px;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+
+            margin: 0;
+    
+            span {
+                color: #b7bdc2;
+            }
+    
+            button {
+                padding: 0 40px;
+                height: 40px;
+            }
+    
+            .disabled__btn {
+    
+                &:hover {
+                    color: #767676;
+                    background-color: #17191c;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+    
 }
 
 @media screen and (max-width: 425px) {
