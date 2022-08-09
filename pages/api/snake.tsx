@@ -33,7 +33,7 @@ type Velocity = {
 const Snake = () => {
 	// Canvas Settings
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
-	const canvasWidth = 500;
+	const canvasWidth = 480;
 	const canvasHeight = 380;
 	const canvasGridSize = 20;
 
@@ -56,7 +56,7 @@ const Snake = () => {
 		head: { x: 12, y: 9 },
 		trail: [],
 	});
-	const [apple, setApple] = useState<Apple>({ x: -1, y: -1 });
+	const [apple, setApple] = useState<Apple>({ x: -2, y: -1 });
 	const [velocity, setVelocity] = useState<Velocity>({ dx: 0, dy: 0 });
 	const [previousVelocity, setPreviousVelocity] = useState<Velocity>({
 		dx: 0,

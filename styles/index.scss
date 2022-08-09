@@ -155,7 +155,7 @@
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
 
             margin: 0;
     
@@ -164,7 +164,7 @@
             }
     
             button {
-                padding: 0 40px;
+                padding: 0 20px;
                 height: 40px;
             }
     
@@ -181,13 +181,25 @@
     
 }
 
+@media screen and (max-width: 768px) {
+    .snake {
+        canvas {
+            margin-bottom: 15px !important;
+        }
+
+        button {
+            height: 32px !important;
+        }
+    }
+}
+
 @media screen and (max-width: 425px) {
-    .memory {
+    .board {
         grid-template-columns: repeat(5, 60px) !important;
 
         .card {
             height: 60px !important;
-
+            
             .card__front, .card__back {
                 align-items: center !important;
             }
@@ -197,15 +209,21 @@
                 line-height: 0 !important;
             }
         }
+
+        .menu {
+            max-width: 332px !important;
+        }
     }
 
-    .menu {
-        max-width: 332px !important;
+    .snake {
+        canvas {
+            width: 400px;
+        }
     }
 }
 
 @media screen and (max-width: 375px) {
-    .memory {
+    .board {
         grid-template-columns: repeat(5, 50px) !important;
 
         .card {
@@ -215,9 +233,15 @@
                 font-size: 30px !important;
             }
         }
+
+        .menu {
+            max-width: 282px !important;
+        }
     }
 
-    .menu {
-        max-width: 282px !important;
+    .snake {
+        canvas {
+            width: 320px;
+        }
     }
 }
