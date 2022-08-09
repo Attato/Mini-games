@@ -62,36 +62,38 @@ const Memory = () => {
     return(
         <>
             <div className="memory">
-                { boardData.map((data, idx) => {
+                <div className="board">
+                    { boardData.map((data, idx) => {
 
-                    const flipped = flippedCards.includes(idx)
-                    ? "flipped" : "";
-                    const found = foundCards.includes(idx)
-                    ? "flipped found" : "";
+                        const flipped = flippedCards.includes(idx)
+                        ? "flipped" : "";
+                        const found = foundCards.includes(idx)
+                        ? "flipped found" : "";
 
-                    return (
-                        <div 
-                            key={idx} 
-                            className={`card ${flipped} ${found}`}
-                            onClick={() => updateBoardData(idx)}
+                        return (
+                            <div 
+                                key={idx} 
+                                className={`card ${flipped} ${found}`}
+                                onClick={() => updateBoardData(idx)}
+                            >
+                                <div className="card__front">{data}</div>
+                                <div className="card__back"></div>
+                            </div>
+                        );
+                    })}
+                </div>
+                <div className="menu">
+                    <span>Moves: {moves}</span>
+                    <button 
+                        onClick={() => initialize()}
+                        disabled={!gameOver}
+                        className={gameOver ? "" : "disabled__btn"}
                         >
-                            <div className="card__front">{data}</div>
-                            <div className="card__back"></div>
-                        </div>
-                    );
-                })}
+                        Reset
+                    </button>
+                </div>
             </div>
             
-            <div className="menu">
-                <span>Moves: {moves}</span>
-                <button 
-                    onClick={() => initialize()}
-                    disabled={!gameOver}
-                    className={gameOver ? "" : "disabled__btn"}
-                    >
-                    Reset
-                </button>
-            </div>
         </>
     );
 }
