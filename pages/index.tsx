@@ -5,7 +5,8 @@ import { tabs } from './api/tabs';
 import { motion } from 'framer-motion';
 
 const Home = () => {
-	const [[page], setPage] = useState([0, 0]);
+
+	const [[page], setPage] = useState([0, null]);
 	
 	useEffect(() => {
 		setPage(JSON.parse(localStorage.getItem('page number')));
@@ -17,22 +18,19 @@ const Home = () => {
 	}, [page])
 	
 	return (
-		<motion.div initial="hidden" whileInView="visible" translate="no">
-
+		<div translate="no">
 			<Header />
 
 			<div className="row">
 				<div className="sub">
 					<div className="sub__column">
-						{tabs.map(({ title }, i) => {
-							const isActive = i === page;
+						{tabs.map(({ title }, activePage) => {
+							const isActive = activePage === page;
 							return (
 								<a
-									key={i}
-									onClick={() => {
-										setPage([i, i - page]);
-									}}
-									className={isActive ? 'hover' : ''}
+									key={activePage}
+									className={isActive ? 'active__tab' : ''}
+									onClick={() => {setPage([activePage, activePage - page])}}
 								>
 									{title}
 								</a>
@@ -41,18 +39,18 @@ const Home = () => {
 					</div>
 				</div>
 
-				<motion.section
+				<motion.div
 					key={page}
 					initial={{ y: 10, opacity: 0 }}
 					animate={{ y: 0, opacity: 1 }}
 					transition={{ duration: 0.8, delay: 0 }}
 				>
 					{tabs[page].wrap}
-				</motion.section>
+				</motion.div>
 			</div>
 
 			<Footer />
-		</motion.div>
+		</div>
 	);
 };
 
