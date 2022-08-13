@@ -14,7 +14,7 @@ const Header = ( ) => {
                         <Link href="https://github.com/Attato"><a target="blank"><Image src="/github.svg" alt="" width={20} height={20}/></a></Link>
 
                     </span>
-                    <h1 className={styles.logo}>Attato</h1>
+                    <h1 className={styles.logo}><Link href="https://portfolio-attato.vercel.app/"><a>Attato</a></Link></h1>
                     <div className={styles.mail}><Link href="mailto:rde8519@mail.ru"><a>rde8519@mail.ru</a></Link></div>
                     <div className={styles.mobile__mail}><Link href="mailto:rde8519@mail.ru"><a>@mail</a></Link></div>
                 </div>

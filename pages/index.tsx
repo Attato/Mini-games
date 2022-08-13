@@ -5,19 +5,16 @@ import { tabs } from './api/tabs';
 import { motion } from 'framer-motion';
 
 const Home = () => {
-	const [page, setPage] = useState(0);
+	const [[page], setPage] = useState([0, 0]);
 	
 	useEffect(() => {
-		localStorage.setItem('page number', page.toString());
+		setPage(JSON.parse(localStorage.getItem('page number')));
+		console.log(JSON.parse(localStorage.getItem('page number')));
+	}, [])
+	
+	useEffect(() => {
+		localStorage.setItem('page number', JSON.stringify([page]));
 	}, [page])
-	
-	useEffect(() => {
-		setPage(
-			localStorage.getItem('page number')
-				? parseInt(localStorage.getItem('page number')!)
-				: 0
-		);
-	}, []);
 	
 	return (
 		<motion.div initial="hidden" whileInView="visible" translate="no">
@@ -27,13 +24,13 @@ const Home = () => {
 			<div className="row">
 				<div className="sub">
 					<div className="sub__column">
-						{tabs.map(({ title }, wrap) => {
-							const isActive = wrap === page;
+						{tabs.map(({ title }, i) => {
+							const isActive = i === page;
 							return (
 								<a
-									key={wrap}
+									key={i}
 									onClick={() => {
-										setPage(wrap);
+										setPage([i, i - page]);
 									}}
 									className={isActive ? 'hover' : ''}
 								>
@@ -58,5 +55,6 @@ const Home = () => {
 		</motion.div>
 	);
 };
+
 
 export default Home;
