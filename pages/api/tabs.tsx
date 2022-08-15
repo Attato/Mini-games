@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Memory from './memory';
 import Snake from './snake'
+import Chess from './chess';
 
 const MemoryGame = (
 	<div key={Date.now()}>
@@ -11,7 +12,6 @@ const MemoryGame = (
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 
-		<h1>Memory Game</h1>
 		<div className="body">
 			<Memory/>
 		</div>
@@ -26,7 +26,6 @@ const SnakeGame = (
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 
-		<h1>Snake</h1>
 		<div className="body">
 			<Snake/>
 		</div>
@@ -41,9 +40,8 @@ const ChessGame = (
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 
-		<h1>Chess</h1>
 		<div className="body">
-
+			<Chess/>
 		</div>
 	</div>
 );
@@ -56,7 +54,6 @@ const BossFight = (
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 
-		<h1>Boss fight</h1>
 		<div className="body">
 
 		</div>

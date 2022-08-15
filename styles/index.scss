@@ -178,6 +178,53 @@
             }
         }
     }
+
+    .chess {
+        .board {
+            width: calc(72px * 8);
+            height: calc(72px * 8);
+            display: flex;
+            flex-wrap: wrap;
+            
+            .cell {
+                width: 72px;
+                height: 72px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:first-child{ 
+                    border-radius: 6px 0 0 0;
+                }
+
+                &:nth-child(8) { 
+                    border-radius: 0 6px 0 0;
+                }
+
+                &:nth-child(57) { 
+                    border-radius: 0 0 0 6px;
+                }
+
+                &:last-child {
+                    border-radius: 0 0 6px 0;
+                }
+
+                span {
+                    width: 72px !important;
+                    height: 72px !important;
+                    position: relative;
+                }
+            }
+
+            .black {
+                background-color: #b58863;
+            }
+
+            .white {
+                background-color: #f0d9b5;
+            }
+        }
+    }
     
 }
 
