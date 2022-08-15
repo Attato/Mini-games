@@ -214,7 +214,6 @@
 
                 span {
                     width: 72px !important;
-                    height: 72px !important;
                     position: relative;
                 }
             }
@@ -239,6 +238,22 @@
 
         button {
             height: 32px !important;
+        }
+    }
+
+    .chess {
+        .board {
+            width: calc(52px * 8) !important;
+            height: calc(52px * 8) !important;
+
+            .cell {
+                width: 52px !important;
+                height: 52px !important;
+
+                span {
+                    width: 52px !important;               
+                }
+            }
         }
     }
 }
@@ -270,6 +285,22 @@
             width: 400px;
         }
     }
+
+    .chess {
+        .board {
+            width: calc(42px * 8) !important;
+            height: calc(42px * 8) !important;
+
+            .cell {
+                width: 42px !important;
+                height: 42px !important;
+
+                span {
+                    width: 42px !important;               
+                }
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 375px) {
@@ -292,6 +323,22 @@
     .snake {
         canvas {
             width: 320px;
+        }
+    }
+
+    .chess {
+        .board {
+            width: calc(38px * 8) !important;
+            height: calc(38px * 8) !important;
+
+            .cell {
+                width: 38px !important;
+                height: 38px !important;
+
+                span {
+                    width: 38px !important;               
+                }
+            }
         }
     }
 }
