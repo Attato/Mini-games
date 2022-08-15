@@ -10,7 +10,6 @@ const Home = () => {
 	
 	useEffect(() => {
 		setPage(JSON.parse(localStorage.getItem('page number')));
-		console.log(JSON.parse(localStorage.getItem('page number')));
 	}, [])
 	
 	useEffect(() => {

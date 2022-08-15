@@ -31,23 +31,19 @@ type Velocity = {
 };
 
 const Snake = () => {
-	// Canvas Settings
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 	const canvasWidth = 480;
 	const canvasHeight = 380;
 	const canvasGridSize = 20;
 
-	// Game Settings
 	const minGameSpeed = 10;
 	const maxGameSpeed = 15;
 
-	// Game State
 	const [gameDelay, setGameDelay] = useState<number>(1000 / minGameSpeed);
 
 	const [running, setRunning] = useState(false);
 	const [isLost, setIsLost] = useState(false);
 	const [highscore, setHighscore] = useState(0);
-	const [newHighscore, setNewHighscore] = useState(false);
 	const [score, setScore] = useState(0);
 	const [snake, setSnake] = useState<{
 		head: { x: number; y: number };
@@ -69,7 +65,8 @@ const Snake = () => {
 	const generateApplePosition = (): Apple => {
 		const x = Math.floor(Math.random() * (canvasWidth / canvasGridSize));
 		const y = Math.floor(Math.random() * (canvasHeight / canvasGridSize));
-		// Check if random position interferes with snake head or trail
+
+		// Проверка на генерацию яблока вне змейки
 		if (
 			(snake.head.x === x && snake.head.y === y) ||
 			snake.trail.some((snakePart) => snakePart.x === x && snakePart.y === y)
@@ -79,7 +76,7 @@ const Snake = () => {
 		return { x, y };
 	};
 
-	// Initialise state and start countdown
+	// Инициализация состояния
 	const startGame = () => {
 		setGameDelay(1000 / minGameSpeed);
 		setIsLost(false);
@@ -91,16 +88,14 @@ const Snake = () => {
 		setApple(generateApplePosition());
 		setVelocity({ dx: 0, dy: -1 });
 		setRunning(true);
-		setNewHighscore(false);
 	
 	};
 
-	// Reset state and check for highscore
+	// Сброс состояния и запись рекорда
 	const gameOver = () => {
 		if (score > highscore) {
 			setHighscore(score);
 			localStorage.setItem('highscore', score.toString());
-			setNewHighscore(true);
 		}
 		setIsLost(true);
 		setRunning(false);
@@ -168,8 +163,8 @@ const Snake = () => {
 	};
 
 	const drawApple = (ctx: CanvasRenderingContext2D) => {
-		ctx.fillStyle = '#DC3030'; // '#38C172' // '#F4CA64'
-		ctx.strokeStyle = '#881A1B'; // '#187741' // '#8C6D1F
+		ctx.fillStyle = '#DC3030'; 	 // Альтернатива '#38C172' (Зелёное) // '#F4CA64' (Жёлтое)
+		ctx.strokeStyle = '#881A1B'; // Альтернатива '#187741' (Зелёное) // '#8C6D1F' (Жёлтое)
 
 		if (
 			apple &&
@@ -194,46 +189,46 @@ const Snake = () => {
 		}
 	};
 
-	// Update snake.head, snake.trail and apple positions. Check for collisions.
 	const updateSnake = () => {
-		// Check for collision with walls
+		// Переход на другой конец стены
 		const nextHeadPosition = {
 			x: snake.head.x + velocity.dx,
 			y: snake.head.y + velocity.dy,
 		};
-
+		
 		if (nextHeadPosition.x < 0) {
-			nextHeadPosition.x = 25;
-		} else if (nextHeadPosition.x >= 25) {
-            nextHeadPosition.x = 0;
+			nextHeadPosition.x = 24;
+		} else if (nextHeadPosition.x >= 24) {
+			nextHeadPosition.x = 0;
         }
         
 		if (nextHeadPosition.y < 0) {
 			nextHeadPosition.y = 19;
 		} else if (nextHeadPosition.y >= 19) {
-            nextHeadPosition.y = 0;
+			nextHeadPosition.y = 0;
         }
 
-		// Check for collision with apple
+		//	Инкрементирование хвостика
 		if (nextHeadPosition.x === apple.x && nextHeadPosition.y === apple.y) {
 			setScore((prevScore) => prevScore + 1);
 			setApple(generateApplePosition());
 		}
 
 		const updatedSnakeTrail = [...snake.trail, { ...snake.head }];
-		// Remove trail history beyond snake trail length (score + 2)
+
+		// Длина змейки 3 по умолчанию
 		while (updatedSnakeTrail.length > score + 2) updatedSnakeTrail.shift();
-		// Check for snake colliding with itsself
+		// Столкновение с собой
 		if (
 			updatedSnakeTrail.some(
 				(snakePart) =>
 					snakePart.x === nextHeadPosition.x &&
 					snakePart.y === nextHeadPosition.y
 			)
-		)
+		) 
 			gameOver();
+			
 
-		// Update state
 		setPreviousVelocity({ ...velocity });
 		setSnake({
 			head: { ...nextHeadPosition },
@@ -241,7 +236,6 @@ const Snake = () => {
 		});
 	};
 
-	// Game Hook
 	useEffect(() => {
 		const canvas = canvasRef?.current;
 		const ctx = canvas?.getContext('2d');
@@ -253,7 +247,6 @@ const Snake = () => {
 		}
 	}, [snake]);
 
-	// Game Update Interval
 	useInterval(
 		() => {
 			if (!isLost) {
@@ -263,7 +256,7 @@ const Snake = () => {
 		running ? gameDelay : null
 	);
 
-	// DidMount Hook for Highscore
+	// DidMount хук на хранение рекорда в localStorage
 	useEffect(() => {
 		setHighscore(
 			localStorage.getItem('highscore')
@@ -272,14 +265,13 @@ const Snake = () => {
 		);
 	}, []);
 
-	// Score Hook: increase game speed starting at 16
+	// Ускорение игры
 	useEffect(() => {
 		if (score > minGameSpeed && score <= maxGameSpeed) {
 			setGameDelay(1000 / score);
 		}
 	}, [score]);
 
-	// Event Listener: Key Presses
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
 			if (
