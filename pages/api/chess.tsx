@@ -20,7 +20,7 @@ enum Colors {
     black = "black"
 }
 
-class Board { 
+class Board {
     cells: Cell[][] = []
 
     public initCells() {
@@ -39,6 +39,22 @@ class Board {
             }
 
             this.cells.push(row);
+        }
+    }
+
+    public getCopyBoard(): Board {
+        const newBoard = new Board();
+        newBoard.cells = this.cells;
+        return newBoard;
+    }
+
+    public highlightCells(selectedSell: Cell | null) {
+        for (let i = 0; i < this.cells.length; i++) {
+            const row = this.cells[i];
+            for (let j = 0; j < row.length; j++) {
+                const target = row[j];
+                target.available = !!selectedSell?.figure?.canMove(target)
+            }       
         }
     }
 
@@ -113,6 +129,83 @@ class Cell {
         this.available = false;
         this.id = Math.random()
     }
+
+    isEmpty(): boolean {
+        return this.figure === null;
+    }
+
+    isEnemy(target: Cell): boolean {
+        if(target.figure) {
+            return this.figure?.color !== target.figure.color;
+        }
+        
+        return false;
+    }
+
+    isEmptyVertical(target: Cell): boolean {
+        if(this.x !== target.x) {
+            return false
+        }
+
+        const min = Math.min(this.y, target.y)
+        const max = Math.max(this.y, target.y)
+
+        for (let y = min + 1; y < max; y++) {
+            if(!this.board.getCell(this.x, y).isEmpty()) {
+                return false
+            }
+        }
+
+        return true;
+    }
+
+    isEmptyHorizontal(target: Cell): boolean {
+        if(this.y !== target.y) {
+            return false
+        }
+
+        const min = Math.min(this.x, target.x)
+        const max = Math.max(this.x, target.x)
+
+        for (let x = min + 1; x < max; x++) {
+            if(!this.board.getCell(this.y, x).isEmpty()) {
+                return false
+            }
+        }
+
+        return true;
+    }
+
+    isEmptyDiagonal(target: Cell): boolean {
+        const absX = Math.abs(target.x - this.x);
+        const absY = Math.abs(target.y - this.y);
+
+        if(absX !== absY)
+            return false;
+        
+        const dx = this.x < target.x ? 1 : -1
+        const dy = this.y < target.y ? 1 : -1
+
+        for (let i = 1; i < absY; i++) {
+            if(!this.board.getCell(this.x + dx * i, this.y + dy * i).isEmpty()) {
+                return false
+            }
+        }
+        return true
+    }
+
+    setFigure(figure: Figure) {
+        this.figure = figure;
+        this.figure.cell = this;
+    }
+
+    moveFigure(target: Cell) {
+        if(this.figure && this.figure?.canMove(target)) {
+            this.figure.moveFigure(target)
+            target.setFigure(this.figure);
+            this.figure = null;
+        }
+    }
 }
 
 enum FigureNames {
@@ -142,6 +235,10 @@ class Figure {
     }
 
     canMove(target: Cell): boolean {
+        if(target.figure?.color === this.color)
+            return false;
+        if(target.figure?.name === FigureNames.king)
+            return false;
         return true;
     }
 
@@ -156,6 +253,12 @@ class King extends Figure {
         this.logo = color === Colors.black ? blackKing : whiteKing;
         this.name = FigureNames.king;
     }
+
+    canMove(target: Cell): boolean {
+        if(!super.canMove(target)) 
+            return false;
+        return false
+    }
 }
 
 class Knight extends Figure {
@@ -164,14 +267,54 @@ class Knight extends Figure {
         this.logo = color === Colors.black ? blackKnight : whiteKnight;
         this.name = FigureNames.knight;
     }    
+
+    canMove(target: Cell): boolean {
+        if(!super.canMove(target)) 
+            return false;
+        const dx = Math.abs(this.cell.x - target.x)
+        const dy = Math.abs(this.cell.y - target.y)
+
+        return (dx === 1 && dy === 2) || (dx === 2 && dy === 1)
+    }
 }
 
 class Pawn extends Figure {
+
+    isFirstStep: boolean = true;
+
     constructor(color: Colors, cell: Cell) {
         super(color, cell);
         this.logo = color === Colors.black ? blackPawn : whitePawn;
         this.name = FigureNames.pawn;
     }    
+
+    canMove(target: Cell): boolean {
+        if(!super.canMove(target)) 
+            return false;
+        
+        const direction = this.cell.figure?.color === Colors.black ? 1 : -1
+        const firstStepDirection = this.cell.figure?.color === Colors.black ? 2: -2
+
+        if ((target.y === this.cell.y + direction || this.isFirstStep
+            && (target.y === this.cell.y + firstStepDirection))
+            && target.x === this.cell.x
+            && this.cell.board.getCell(target.x, target.y).isEmpty()) {
+                return true;
+        }
+
+        if(target.y === this.cell.y + direction 
+            && (target.x === this.cell.x + 1 || target.x === this.cell.x - 1)
+            && this.cell.isEnemy(target)) {
+                return true;
+            }
+
+        return false;
+    }
+
+    moveFigure(target: Cell) {
+        super.moveFigure(target);
+        this.isFirstStep = false;
+    }
 }
 
 class Queen extends Figure {
@@ -180,6 +323,18 @@ class Queen extends Figure {
         this.logo = color === Colors.black ? blackQueen : whiteQueen;
         this.name = FigureNames.queen;
     }    
+
+    canMove(target: Cell): boolean {
+        if(!super.canMove(target)) 
+            return false;
+        if(this.cell.isEmptyVertical(target))
+            return true;
+        if(this.cell.isEmptyHorizontal(target))
+            return true;
+        if(this.cell.isEmptyDiagonal(target))
+            return true;
+        return false;
+    }
 }
 
 class Rook extends Figure {
@@ -188,6 +343,16 @@ class Rook extends Figure {
         this.logo = color === Colors.black ? blackRook : whiteRook;
         this.name = FigureNames.rook;
     }    
+
+    canMove(target: Cell): boolean {
+        if(!super.canMove(target)) 
+            return false;
+        if(this.cell.isEmptyVertical(target))
+            return true;
+        if(this.cell.isEmptyHorizontal(target))
+            return true;
+        return false
+    }
 }
 
 class Bishop extends Figure {
@@ -195,6 +360,14 @@ class Bishop extends Figure {
         super(color, cell);
         this.logo = color === Colors.black ? blackBishop : whiteBishop;
         this.name = FigureNames.bishop;
+    }
+
+    canMove(target: Cell): boolean {
+        if(!super.canMove(target)) 
+            return false;
+        if(this.cell.isEmptyDiagonal(target))
+            return true;
+        return false
     }
 }
 
@@ -205,12 +378,48 @@ interface BoardProps {
 
 const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
 
+    const [selectedSell, setSelectedSell] = useState<Cell | null>(null);
+    
+    const click = (cell) => {
+        if (selectedSell && selectedSell !== cell && selectedSell.figure?.canMove(cell)) {
+            selectedSell.moveFigure(cell);
+            setSelectedSell(null);
+            updateBoard()
+        } else {
+            setSelectedSell(cell);
+        }
+
+        if(cell.figure) {
+            setSelectedSell(cell);
+        }
+    }
+
+    useEffect(() => {
+        highlightCells()
+    }, [selectedSell])
+
+    const highlightCells = () => {
+        board.highlightCells(selectedSell)
+        updateBoard()
+    }
+
+    const updateBoard = () => {
+        const newBoard = board.getCopyBoard()
+        setBoard(newBoard)
+    }
+
     return (
         <div className="board">
             {board.cells.map((row, index) => 
                 <React.Fragment key={index}>
                     {
-                        row.map(cell => <CellComponent cell={cell} key={cell.id}/>)
+                        row.map(cell => 
+                        <CellComponent
+                            click={click}
+                            cell={cell} 
+                            key={cell.id}
+                            selected={cell.x === selectedSell?.x && cell.y === selectedSell?.y}
+                        />)
                     }
                 </React.Fragment>
             )}
@@ -220,11 +429,15 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
 
 interface CellProps { 
     cell: Cell;
+    selected: boolean;
+    click: (cell: Cell) => void;
 }
 
-const CellComponent: FC<CellProps> = ({cell}) => {
+const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
     return (
-        <div className={["cell", cell.color].join(' ')}>
+        <div className={["cell", cell.color, selected ? "selected" : ""].join(' ')} onClick={() => click(cell)}>
+            {cell.available && !cell.figure && <div className={"available"}/>}
+            {cell.available && cell.figure && <div className={"target"}/>}
             {cell.figure?.logo && <Image src={cell.figure.logo} alt=""/>}
         </div>
     );

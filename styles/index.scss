@@ -149,8 +149,9 @@
 
         canvas {
             margin-bottom: 30px;
-            box-shadow: 0 0.5px 7px rgba(1, 112, 243, 1);
+            box-shadow: 0 0.5px 7px #1a1a1a;
             border-radius: 6px;
+            background-color: #17191c;
         }
 
         .menu {
@@ -195,6 +196,8 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                cursor: pointer;
+                user-select: none;
 
                 &:first-child{ 
                     border-radius: 6px 0 0 0;
@@ -225,9 +228,26 @@
             .white {
                 background-color: #f0d9b5;
             }
+
+            .selected {
+                background-color: #81914f;
+            }
+
+            .available {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background-color: #81914f;
+            }
+
+            .target {
+                position: absolute;
+                width: 72px;
+                height: 72px;
+                background: radial-gradient(transparent 0%, transparent 79%, rgba(20,85,0,0.3) 80%);
+            }
         }
     }
-    
 }
 
 @media screen and (max-width: 768px) {
@@ -299,6 +319,7 @@
                     width: 42px !important;               
                 }
             }
+            
         }
     }
 }
