@@ -274,6 +274,16 @@
                     width: 52px !important;               
                 }
             }
+
+            .available {
+                width: 10px !important;
+                height: 10px !important;
+            }
+
+            .target {
+                width: 52px !important;
+                height: 52px !important;
+            }
         }
     }
 }
@@ -319,7 +329,11 @@
                     width: 42px !important;               
                 }
             }
-            
+
+            .target {
+                width: 42px !important;
+                height: 42px !important;
+            }       
         }
     }
 }
@@ -360,6 +374,11 @@
                     width: 38px !important;               
                 }
             }
+
+            .target {
+                width: 38px !important;
+                height: 38px !important;
+            }  
         }
     }
 }
