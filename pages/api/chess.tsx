@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from 'react'
+import React, { useState, useEffect, useRef, FC } from 'react'
 import Image from 'next/image'
 import blackBishop from 'public/images/black_bishop.png'
 import whiteBishop from 'public/images/white_bishop.png'
@@ -22,6 +22,8 @@ enum Colors {
 
 class Board {
     cells: Cell[][] = []
+    lostBlackFigures: Figure[] = []
+    lostWhiteFigures: Figure[] = []
 
     public initCells() {
 
@@ -45,6 +47,8 @@ class Board {
     public getCopyBoard(): Board {
         const newBoard = new Board();
         newBoard.cells = this.cells;
+        newBoard.lostBlackFigures = this.lostBlackFigures
+        newBoard.lostWhiteFigures = this.lostWhiteFigures
         return newBoard;
     }
 
@@ -199,9 +203,20 @@ class Cell {
         this.figure.cell = this;
     }
 
+    addLostFigure(figure: Figure) {
+        figure.color === Colors.black
+            ? this.board.lostBlackFigures.push(figure)
+            : this.board.lostWhiteFigures.push(figure)
+    }
+
     moveFigure(target: Cell) {
         if(this.figure && this.figure?.canMove(target)) {
             this.figure.moveFigure(target)
+            
+            if(target.figure) {
+                this.addLostFigure(target.figure)
+            }
+
             target.setFigure(this.figure);
             this.figure = null;
         }
@@ -257,7 +272,7 @@ class King extends Figure {
     canMove(target: Cell): boolean {
         if(!super.canMove(target)) 
             return false;
-        return false
+        return false;
     }
 }
 
@@ -299,14 +314,14 @@ class Pawn extends Figure {
             && (target.y === this.cell.y + firstStepDirection))
             && target.x === this.cell.x
             && this.cell.board.getCell(target.x, target.y).isEmpty()) {
-                return true;
+            return true;
         }
 
         if(target.y === this.cell.y + direction 
             && (target.x === this.cell.x + 1 || target.x === this.cell.x - 1)
             && this.cell.isEnemy(target)) {
-                return true;
-            }
+            return true;
+        }
 
         return false;
     }
@@ -371,26 +386,35 @@ class Bishop extends Figure {
     }
 }
 
+class Player {
+    color: Colors;
+
+    constructor(color: Colors) {
+        this.color = color; 
+    }
+}
+
 interface BoardProps { 
     board: Board;
     setBoard: (board: Board) => void;
+    currentPlayer: Player | null;
+    swapPlayer: () => void;
 }
 
-const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
+const BoardComponent: FC<BoardProps> = ({board, setBoard, currentPlayer, swapPlayer}) => {
 
     const [selectedSell, setSelectedSell] = useState<Cell | null>(null);
     
     const click = (cell) => {
         if (selectedSell && selectedSell !== cell && selectedSell.figure?.canMove(cell)) {
             selectedSell.moveFigure(cell);
+            swapPlayer();
             setSelectedSell(null);
             updateBoard()
         } else {
-            setSelectedSell(cell);
-        }
-
-        if(cell.figure) {
-            setSelectedSell(cell);
+            if(cell.figure?.color === currentPlayer.color) {
+                setSelectedSell(cell);
+            }
         }
     }
 
@@ -441,26 +465,99 @@ const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
             {cell.figure?.logo && <Image src={cell.figure.logo} alt=""/>}
         </div>
     );
-} 
+}
+
+interface LostFiguresProps {
+    figures: Figure[]
+}
+
+const LostFigures: FC<LostFiguresProps> = ({figures}) => {
+    return (
+        <div className="score">
+            {figures.map(figure => 
+                <React.Fragment key={figure.id}>
+                    {figure.logo && <Image src={figure.logo} alt=""/>}
+                </React.Fragment>    
+            )}
+        </div>
+    )
+}
 
 const Chess = () => {
 
     const [board, setBoard] = useState(new Board())
-    
+    const [whitePlayer, setWhitePlayer] = useState(new Player(Colors.white))
+    const [blackPlayer, setBlackPlayer] = useState(new Player(Colors.black))
+    const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null)
+
     const restart = () => {      
         const newBoard = new Board();
         newBoard.initCells()
         newBoard.addFigures()
         setBoard(newBoard)
     }
+
+    const swapPlayer = () => {
+        setCurrentPlayer(currentPlayer?.color === Colors.white ? blackPlayer : whitePlayer)
+    }
     
     useEffect(() => {
         restart();
+        setCurrentPlayer(whitePlayer);
     }, [])
+
+    // Timer
+
+    const [blackTime, setBlackTime] = useState(600);
+    const [whiteTime, setWhiteTime] = useState(600);
+
+    const timer = useRef<null | ReturnType<typeof setInterval>>(null)
+    
+    useEffect(() => {
+        startTimer()
+    }, [currentPlayer])
+
+    const startTimer = () => {
+        if(timer.current) {
+            clearInterval(timer.current)
+        }
+
+        const callback = currentPlayer?.color === Colors.white ? decrementWhiteTimer : decrementBlackTimer
+        timer.current = setInterval(callback, 1000)
+    }
+
+    const decrementBlackTimer = () => {
+        setBlackTime(prev => prev - 1)
+    }
+
+    const decrementWhiteTimer = () => {
+        setWhiteTime(prev => prev - 1)
+    }
 
     return (
         <div className="chess">
-            <BoardComponent board={board} setBoard={setBoard}></BoardComponent>
+            <BoardComponent 
+                board={board} 
+                setBoard={setBoard}
+                currentPlayer={currentPlayer}
+                swapPlayer={swapPlayer}
+            />
+
+            <section className="info">
+
+                <div className="first_player">
+                    <h1 className="time">{Math.floor((blackTime) / 60) + ":" + Math.floor((blackTime) % 60)}</h1>
+                    <LostFigures 
+                        figures={board.lostWhiteFigures}
+                        />
+                </div>
+                <div className="second_player">
+                    <h1 className="time">{Math.floor((whiteTime) / 60) + ":" + Math.floor((whiteTime) % 60)}</h1>
+                    <LostFigures 
+                        figures={board.lostBlackFigures}
+                    />
+                </div>
+            </section>
         </div>
     );
 }
