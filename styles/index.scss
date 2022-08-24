@@ -327,25 +327,28 @@
 }
 
 @media screen and (max-width: 425px) {
-    .board {
-        grid-template-columns: repeat(5, 60px) !important;
-        gap: 5px !important;
 
-        .card {
-            height: 60px !important;
-            
-            .card__front, .card__back {
-                align-items: center !important;
+    .memory {
+        .board {
+            grid-template-columns: repeat(5, 60px) !important;
+            gap: 5px !important;
+    
+            .card {
+                height: 60px !important;
+                
+                .card__front, .card__back {
+                    align-items: center !important;
+                }
+    
+                .card__front {
+                    font-size: 40px !important;
+                    line-height: 0 !important;
+                }
             }
-
-            .card__front {
-                font-size: 40px !important;
-                line-height: 0 !important;
+    
+            .menu {
+                max-width: 332px !important;
             }
-        }
-
-        .menu {
-            max-width: 332px !important;
         }
     }
 
@@ -378,19 +381,26 @@
 }
 
 @media screen and (max-width: 375px) {
-    .board {
-        grid-template-columns: repeat(5, 50px) !important;
 
-        .card {
-            height: 50px !important;
+    .sub__column {
+        gap: 20px !important;
+    }
 
-            .card__front {
-                font-size: 30px !important;
+    .memory {
+        .board {
+            grid-template-columns: repeat(5, 50px) !important;
+    
+            .card {
+                height: 50px !important;
+    
+                .card__front {
+                    font-size: 30px !important;
+                }
             }
-        }
-
-        .menu {
-            max-width: 282px !important;
+    
+            .menu {
+                max-width: 282px !important;
+            }
         }
     }
 
@@ -402,22 +412,32 @@
 
     .chess {
         .board {
-            width: calc(38px * 8) !important;
-            height: calc(38px * 8) !important;
+            width: calc(34px * 8) !important;
+            height: calc(34px * 8) !important;
 
             .cell {
-                width: 38px !important;
-                height: 38px !important;
+                width: 34px !important;
+                height: 34px !important;
 
                 span {
-                    width: 38px !important;               
+                    width: 34px !important;               
                 }
             }
 
             .target {
-                width: 38px !important;
-                height: 38px !important;
+                width: 34px !important;
+                height: 34px !important;
             }  
+            
+            .available {
+                width: 8px !important;
+                height: 8px !important;
+            }
+        }
+
+        
+        .time {
+            font-size: 18px !important;
         }
     }
 }
