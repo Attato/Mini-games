@@ -260,11 +260,8 @@
             
             .score {
                 display: flex;
-                width: 300px;
-                height: 200px;
                 padding: 5px;
                 color: #767676;
-                background-color: #262421;
                 margin-bottom: 20px;
 
                 span {
@@ -273,13 +270,16 @@
                 }
             }
 
+            .active {
+                color: #25a53d;
+            }
+
             .time {
                 display: flex;
                 text-align: left; 
-                padding: 10px; 
-                background-color: #262421;
+                padding: 10px;
                 margin: 0;
-                width: 140px;
+                width: 3ch;
             }
         }
 
@@ -327,6 +327,7 @@
 @media screen and (max-width: 425px) {
     .board {
         grid-template-columns: repeat(5, 60px) !important;
+        gap: 5px !important;
 
         .card {
             height: 60px !important;
@@ -393,7 +394,7 @@
 
     .snake {
         canvas {
-            width: 280px;
+            width: 270px;
         }
     }
 

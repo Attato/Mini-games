@@ -18,7 +18,7 @@ const Memory = () => {
         }
     }, [moves])
 
-    const boardIcons = ["🦒", "🦣", "🦬", "🦌", "🐏", "🦭", "🐆", "🦔", "🦅", "🦈"]
+    const boardIcons = ["🦒", "🦣", "🦬", "🦌", "🐏", "🦭", "🐆", "🦔", "🦅", "🦈" , "🦈" , "🦈" , "🦈" , "🦈", "🦈"]
     const shuffle = () => {
         const shuffledCards = [...boardIcons, ...boardIcons]
             .sort(() => Math.random() - 0.5)
