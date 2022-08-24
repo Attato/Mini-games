@@ -57,7 +57,7 @@
         
         .board {
             display: grid;
-            grid-template-columns: repeat(5, 75px);
+            grid-template-columns: repeat(4, 75px);
             gap: 8px;
             margin-bottom: 30px;
 
@@ -73,7 +73,7 @@
                 .card__front, .card__back {
                     display: flex;
                     justify-content: center;
-                    align-items: baseline;
+                    align-items: center;
                     position: absolute;
                     left: 0;
                     top: 0;
@@ -88,9 +88,6 @@
 
                 .card__front {
                     z-index: 2;
-                    font-size: 50px;
-                    vertical-align: middle;
-                    text-align: center;
                     background-color: #2e2e34;   
                     transform: rotateY(180deg);
                     backface-visibility: hidden;
@@ -120,15 +117,6 @@
             button {
                 padding: 0 40px;
                 height: 40px;
-            }
-    
-            .disabled__btn {
-    
-                &:hover {
-                    color: #767676;
-                    background-color: #17191c;
-                    cursor: not-allowed;
-                }
             }
         }
     }
@@ -279,7 +267,7 @@
         .time {
             margin: 0;
             font-size: 25px;
-            width: 3ch;
+            width: 4ch;
         }
     }
 }
@@ -330,7 +318,7 @@
 
     .memory {
         .board {
-            grid-template-columns: repeat(5, 60px) !important;
+            grid-template-columns: repeat(4, 60px) !important;
             gap: 5px !important;
     
             .card {
@@ -341,8 +329,11 @@
                 }
     
                 .card__front {
-                    font-size: 40px !important;
-                    line-height: 0 !important;
+
+                    img {
+                        width: 60px;
+                        height: 60px;                     
+                    }
                 }
             }
     
@@ -388,13 +379,17 @@
 
     .memory {
         .board {
-            grid-template-columns: repeat(5, 50px) !important;
+            grid-template-columns: repeat(4, 50px) !important;
     
             .card {
                 height: 50px !important;
     
                 .card__front {
-                    font-size: 30px !important;
+
+                    img {
+                        width: 50px;
+                        height: 50px;                     
+                    }
                 }
             }
     
@@ -428,7 +423,7 @@
                 width: 34px !important;
                 height: 34px !important;
             }  
-            
+
             .available {
                 width: 8px !important;
                 height: 8px !important;

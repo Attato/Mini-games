@@ -18,7 +18,17 @@ const Memory = () => {
         }
     }, [moves])
 
-    const boardIcons = ["🦒", "🦣", "🦬", "🦌", "🐏", "🦭", "🐆", "🦔", "🦅", "🦈" , "🦈" , "🦈" , "🦈" , "🦈", "🦈"]
+    const boardIcons = [
+        <img src="/memory/aries.png" width="75" height="75"/>, 
+        <img src="/memory/bird.png" width="75" height="75"/>, 
+        <img src="/memory/boar.png" width="75" height="75"/>, 
+        <img src="/memory/cat.png" width="75" height="75"/>, 
+        <img src="/memory/chick.png" width="75" height="75"/>, 
+        <img src="/memory/chicken.png" width="75" height="75"/>, 
+        <img src="/memory/dog.png" width="75" height="75"/>,
+        <img src="/memory/rabbit.png" width="75" height="75"/>
+    ]
+
     const shuffle = () => {
         const shuffledCards = [...boardIcons, ...boardIcons]
             .sort(() => Math.random() - 0.5)
@@ -84,13 +94,7 @@ const Memory = () => {
                 </div>
                 <div className="menu">
                     <span>Moves: {moves}</span>
-                    <button 
-                        onClick={() => initialize()}
-                        disabled={!gameOver}
-                        className={gameOver ? "" : "disabled__btn"}
-                        >
-                        Reset
-                    </button>
+                    <button onClick={() => initialize()}>Reset</button>
                 </div>
             </div>
             
