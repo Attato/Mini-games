@@ -510,6 +510,11 @@ const Chess = () => {
 
 	return (
 		<div className="chess">
+            <div className="first_player">
+                <h1 className={currentPlayer?.color == "black" ? "active time" : "time"}>
+                    {('0' + Math.floor((blackTime) / 60)).slice(1)}:{('0' + Math.floor((blackTime) % 60)).slice(-2)}
+                </h1>
+            </div>
 			<BoardComponent
 				board={board}
 				setBoard={setBoard}
@@ -517,18 +522,13 @@ const Chess = () => {
 				swapPlayer={swapPlayer}
 			/>
 
-			<section className="info">
-				<div className="first_player">
-					<h1 className={currentPlayer?.color == "black" ? "active time" : "time"}>
-                        {('0' + Math.floor((blackTime) / 60)).slice(1)}:{('0' + Math.floor((blackTime) % 60)).slice(-2)}
-					</h1>
-				</div>
+
 				<div className="second_player">
 					<h1 className={currentPlayer?.color == "white" ? "active time" : "time"}>
                         {('0' + Math.floor((whiteTime) / 60)).slice(1)}:{('0' + Math.floor((whiteTime) % 60)).slice(-2)}
 					</h1>
 				</div>
-			</section>
+			
 		</div>
 	);
 };

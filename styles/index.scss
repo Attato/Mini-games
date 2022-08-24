@@ -182,7 +182,8 @@
     }
 
     .chess {
-        display: flex;
+        display: flex;       
+        flex-direction: column;
         gap: 20px;
         
         .board {
@@ -249,40 +250,37 @@
             }
         }
 
-        .info {
+        .score {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100%;
-            margin: auto;
-            padding: 15px;
-            border-radius: 6px;
-            
-            .score {
-                display: flex;
-                padding: 5px;
-                color: #767676;
-                margin-bottom: 20px;
+            padding: 5px;
+            color: #767676;
+            margin-bottom: 20px;
 
-                span {
-                    width: 46px !important;
-                    height: 46px !important;
-                }
-            }
-
-            .active {
-                color: #25a53d;
-            }
-
-            .time {
-                display: flex;
-                text-align: left; 
-                padding: 10px;
-                margin: 0;
-                width: 3ch;
+            span {
+                width: 46px !important;
+                height: 46px !important;
             }
         }
 
+        .active {
+            color: #25a53d;
+        }
+
+        .first_player {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .second_player {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .time {
+            margin: 0;
+            font-size: 25px;
+            width: 3ch;
+        }
     }
 }
 
@@ -320,6 +318,10 @@
                 width: 52px !important;
                 height: 52px !important;
             }
+        }
+
+        .time {
+            font-size: 20px !important;
         }
     }
 }
