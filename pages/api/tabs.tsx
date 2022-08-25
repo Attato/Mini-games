@@ -46,10 +46,10 @@ const ChessGame = (
 	</div>
 );
 
-const BossFight = (
+const Sudocu = (
 	<div key={Date.now()}>
 		<Head>
-			<title>Boss fight</title>
+			<title>Sudocu</title>
 			<meta name="description" content="" />
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
@@ -64,5 +64,5 @@ export const tabs = [
 	{ title: 'Memory game', wrap: [MemoryGame] },
 	{ title: 'Snake', wrap: [SnakeGame] },
 	{ title: 'Chess', wrap: [ChessGame] },
-	{ title: 'Boss fight', wrap: [BossFight] },
+	{ title: 'Sudocu', wrap: [Sudocu] },
 ];
