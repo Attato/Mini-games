@@ -19,14 +19,14 @@ const Memory = () => {
     }, [moves])
 
     const boardIcons = [
-        <img src="/memory/aries.png" width="75" height="75"/>, 
-        <img src="/memory/bird.png" width="75" height="75"/>, 
-        <img src="/memory/boar.png" width="75" height="75"/>, 
-        <img src="/memory/cat.png" width="75" height="75"/>, 
-        <img src="/memory/chick.png" width="75" height="75"/>, 
-        <img src="/memory/chicken.png" width="75" height="75"/>, 
-        <img src="/memory/dog.png" width="75" height="75"/>,
-        <img src="/memory/rabbit.png" width="75" height="75"/>
+        <img src="/memory/aries.png" width="75"   key={Date.now()} alt="board icon" height="75"/>, 
+        <img src="/memory/bird.png" width="75"    key={Date.now()} alt="board icon" height="75"/>, 
+        <img src="/memory/boar.png" width="75"    key={Date.now()} alt="board icon" height="75"/>, 
+        <img src="/memory/cat.png" width="75"     key={Date.now()} alt="board icon" height="75"/>, 
+        <img src="/memory/chick.png" width="75"   key={Date.now()} alt="board icon" height="75"/>, 
+        <img src="/memory/chicken.png" width="75" key={Date.now()} alt="board icon" height="75"/>, 
+        <img src="/memory/dog.png" width="75"     key={Date.now()} alt="board icon" height="75"/>,
+        <img src="/memory/rabbit.png" width="75"  key={Date.now()} alt="board icon" height="75"/>
     ]
 
     const shuffle = () => {
