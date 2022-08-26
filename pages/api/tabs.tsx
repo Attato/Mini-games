@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Memory from './memory';
 import Snake from './snake'
 import Chess from './chess';
+import Hangman from './hangman'
 
 const MemoryGame = (
 	<div key={Date.now()}>
@@ -46,23 +47,23 @@ const ChessGame = (
 	</div>
 );
 
-const Sudocu = (
+const HangmanGame = (
 	<div key={Date.now()}>
 		<Head>
-			<title>Sudocu</title>
+			<title>Hangman</title>
 			<meta name="description" content="" />
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 
 		<div className="body">
-
+			<Hangman/>
 		</div>
 	</div>
 );
 
 export const tabs = [
-	{ title: 'Memory game', wrap: [MemoryGame] },
-	{ title: 'Snake', wrap: [SnakeGame] },
-	{ title: 'Chess', wrap: [ChessGame] },
-	{ title: 'Sudocu', wrap: [Sudocu] },
+	{ title: 'Memory game', wrap: MemoryGame },
+	{ title: 'Snake', wrap: SnakeGame },
+	{ title: 'Chess', wrap: ChessGame },
+	{ title: 'Hangman', wrap: HangmanGame },
 ];

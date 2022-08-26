@@ -26,9 +26,10 @@ button {
 	background-color: #17191c;
 	color: #767676;
 	border: none;
-	border-radius: 6px;
+	border-radius: 10px;
 	font-size: 16px;
 	cursor: pointer;
+	user-select: none;
 
 	&:hover {
 		background-color: #1a1d20;
