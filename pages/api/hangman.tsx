@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
 const words = [
-	{ description: 'Mixture of gases required for breathing', word: 'air' },
-	{ description: 'Tool for opening locks', word: 'key' },
-	{ description: 'The only star in the solar system', word: 'sun' },
-	{ description: 'Mechanical self-propelled vehicle used for the transport of people or goods by road', word: 'car'},
-	{ description: 'Writing affiliation', word: 'pen' },
-	{ description: 'Tool for chopping wood', word: 'axe' },
-	{ description: 'A container used to store or transport its contents', word: 'box'},
-	{ description: 'Baked pastry dish', word: 'pie' },
-	{ description: 'Frozen water', word: 'ice' },
-	{ description: 'The full cycle of changing seasons', word: 'year' },
-	{ description: 'A paper carrier of information ', word: 'book' },
-	{ description: 'A continuous sequence of events that occurs in a seemingly irreversible sequence from the past, through the present, into the future.', word: 'time'},
-	{ description: 'Permanent and densely populated place with an administrative orientation of boundaries', word: 'city'},
-	{ description: 'A rodent that loves cheese', word: 'mouse' },
-	{ description: 'A fin projectile fired from a bow.', word: 'arrow' },
-	{ description: 'Universal equivalent, acting as a measure of the cost of goods or services', word: 'money'},
-	{ description: 'What kind of animal does a wizard turn his enemies into', word: 'sheep'},
+	{ description: 'What is the mixture of gases required for breathing called?', word: 'air' },
+	{ description: 'What is the name of the tool for opening locks?', word: 'key' },
+	{ description: 'What is the name of the only star in the solar system?', word: 'sun' },
+	{ description: 'What is the name of a mechanical self-propelled vehicle used to transport people or goods on roads?', word: 'car'},
+	{ description: 'What is the name of the writing instrument?', word: 'pen' },
+	{ description: 'What is the name of tool for chopping wood?', word: 'axe' },
+	{ description: 'What is the name of the container used to store or transport its contents?', word: 'box'},
+	{ description: 'What is the name of baked pastry dish?', word: 'pie' },
+	{ description: 'What is frozen water called?', word: 'ice' },
+	{ description: 'How long does a full cycle of seasons take?', word: 'year' },
+	{ description: 'What is the name of the paper carrier of information?', word: 'book' },
+	{ description: 'What is the name of a continuous sequence of events occurring in a seemingly irreversible sequence from the past through the present to the future?', word: 'time'},
+	{ description: 'What is the name of a permanent and densely populated place with an administrative orientation of borders?', word: 'city'},
+	{ description: 'What rodent loves cheese?', word: 'mouse' },
+	{ description: 'What is the name of a fin projectile fired from a bow?', word: 'arrow' },
+	{ description: 'What is the name of a universal equivalent, acting as a measure of the cost of goods or services?', word: 'money'},
+	{ description: 'What kind of animal does a wizard turn his enemies into?', word: 'sheep'},
 ];
 
 let allWords = words.map((i) => i.word);
@@ -61,6 +61,7 @@ const Word = ({ selectedWord, correctLetters }) => {
 	return (
 		<>
 			<div className="description">
+				<h3>Question</h3>
 				<p>{obj.description}</p>
 			</div>
 
@@ -123,13 +124,13 @@ const Popup = ({
 			<div className="popup">
 				<h2>
 					{checkWin(correctLetters, wrongLetters, selectedWord) === 'win'
-						? 'Congratulations! You won! 😃'
-						: 'Unfortunately you lost. 😕'}
+						? 'Congratulations! You won!'
+						: 'Unfortunately you lost.'}
 				</h2>
 				<h3>
 					{checkWin(correctLetters, wrongLetters, selectedWord) === 'win'
-						? 'you guessed the word'
-						: 'the word was'}
+						? 'you guessed the word '
+						: 'the word was '}
 					<span>{selectedWord}</span>
 				</h3>
 				<button onClick={playAgain}>Play Again</button>

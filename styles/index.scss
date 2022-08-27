@@ -1,3 +1,5 @@
+@import "styles/variables.scss";
+
 .sub {
 	display: flex;
 	flex-direction: row;
@@ -5,7 +7,7 @@
 	align-items: center;
 	max-width: 1300px;
 	min-height: 60px;
-	margin: 0 auto 30px auto;
+	margin: 0 auto;
 	padding: 20px 0;
 	border-top: 1px solid #28292b;
 	user-select: none;
@@ -24,7 +26,7 @@
 
 	a {
 		font-size: 14px;
-		color: #b7bdc2;
+		color: $text;
 		cursor: pointer;
 		transition: all 0.4s;
 
@@ -82,7 +84,7 @@
 				}
 
 				.card__back {
-					background-color: #17191c;
+					background-color: $bg;
 				}
 
 				.card__front {
@@ -110,13 +112,12 @@
 			width: 100%;
 
 			span {
-				color: #acacac;
+				color: $text;
 			}
 
 			button {
-				padding: 0 15px;
                 display: flex;
-                align-items: center;
+				gap: 5px;
 			}
 		}
 	}
@@ -126,7 +127,7 @@
 			margin-bottom: 30px;
 			box-shadow: 0 0.5px 7px #1a1a1a;
 			border-radius: 6px;
-			background-color: #17191c;
+			background-color: $bg;
 		}
 
 		.menu {
@@ -144,27 +145,27 @@
 				color: #767676;
 
 				button {
-                    padding: 0 15px;
                     display: flex;
                     align-items: center;
 				}
 			}
 			span {
-				color: #acacac;
+				color: $text;
 			}
 
 			button {
-                padding: 0 15px;
                 display: flex;
                 align-items: center;
-			}
 
-			.disabled__btn {
-				&:hover {
-					color: #767676;
-					background-color: #17191c;
-					cursor: not-allowed;
+				.btn {
+					display: flex;
+					gap: 5px;
 				}
+
+				.arrow {		
+					transform: rotate(-90deg);
+				}
+
 			}
 		}
 	}
@@ -316,13 +317,11 @@
                 color: white;
                 font-size: 20px;
                 display: flex;
+				flex-direction: column;
                 justify-content: center;
+				align-items: center;
                 text-align: center;
-
-                p {
-                    margin: 0;
-                    line-height: 1.4;
-                }
+				gap: 10px;
             }
 
             .word {
@@ -367,10 +366,12 @@
 
                 h2, h3 {
                     color: white;
+					font-weight: 500;
                 }
 
                 h3 {
                     margin-top: 10px;
+					border: none;
 
                     span {
                         border-bottom: 3px solid white;

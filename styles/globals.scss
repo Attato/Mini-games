@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap');
+@import "styles/variables.scss";
 
 * {
 	box-sizing: border-box;
@@ -23,22 +24,15 @@ button, input {
 }
 
 button {
-	background-color: #17191c;
-	color: #767676;
+	background-color: transparent;
+	color: white;
 	border: none;
-	border-radius: 10px;
 	font-size: 16px;
 	cursor: pointer;
 	user-select: none;
 
-	&:hover {
-		background-color: #1a1d20;
-		color: #8b8a8a;
-	}
-
 	&:active {
-		background-color: #1d2024; 
-		color: #ababab;
+		color: white;
 	}
 
 	&:focus-visible {
@@ -72,6 +66,22 @@ h1 {
 	margin-bottom: 30px;
 	user-select: none;
 	text-align: center;
+}
+
+h3 {
+	font-size: 18px;
+    font-weight: 500;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #28292b;
+}
+
+p {
+	font-size: 16px;
+    line-height: 1.4;
+    color: $text;
+    max-width: 380px;
+    width: 100%;
+    margin: 0;
 }
 
 @media screen and (max-width: 425px) {

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image'
 
 type Delay = number | null;
 type TimerHandler = (...args: any[]) => void;
@@ -349,7 +350,7 @@ const Snake = () => {
 
                     <button onClick={startGame}>
                     {
-                        running ? "Restart game" : "Start game"
+                        running ? <div className="btn">Restart game <Image src="/reset.svg" width={15} height={15} alt=""/></div> : <div className="btn">Start game <Image className="arrow" src="/arrow.svg" width={15} height={15} alt=""/></div>
                     }
                     </button>
                 </div>

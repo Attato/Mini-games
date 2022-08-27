@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 const Memory = () => {
 
@@ -19,14 +20,14 @@ const Memory = () => {
     }, [moves])
 
     const boardIcons = [
-        <img src="/memory/aries.png" width="75"   key={Date.now()} alt="board icon" height="75"/>, 
-        <img src="/memory/bird.png" width="75"    key={Date.now()} alt="board icon" height="75"/>, 
-        <img src="/memory/boar.png" width="75"    key={Date.now()} alt="board icon" height="75"/>, 
-        <img src="/memory/cat.png" width="75"     key={Date.now()} alt="board icon" height="75"/>, 
-        <img src="/memory/chick.png" width="75"   key={Date.now()} alt="board icon" height="75"/>, 
-        <img src="/memory/chicken.png" width="75" key={Date.now()} alt="board icon" height="75"/>, 
-        <img src="/memory/dog.png" width="75"     key={Date.now()} alt="board icon" height="75"/>,
-        <img src="/memory/rabbit.png" width="75"  key={Date.now()} alt="board icon" height="75"/>
+        <Image src="/memory/aries.png" width={75} height={75} key={Date.now()} alt="board icon"/>, 
+        <Image src="/memory/bird.png" width={75} height={75} key={Date.now()} alt="board icon"/>, 
+        <Image src="/memory/boar.png" width={75} height={75} key={Date.now()} alt="board icon" />, 
+        <Image src="/memory/cat.png" width={75} height={75} key={Date.now()} alt="board icon" />, 
+        <Image src="/memory/chick.png" width={75} height={75} key={Date.now()} alt="board icon" />, 
+        <Image src="/memory/chicken.png" width={75} height={75} key={Date.now()} alt="board icon" />, 
+        <Image src="/memory/dog.png" width={75} height={75} key={Date.now()} alt="board icon" />,
+        <Image src="/memory/rabbit.png" width={75} height={75} key={Date.now()} alt="board icon" />
     ]
 
     const shuffle = () => {
@@ -94,7 +95,7 @@ const Memory = () => {
                 </div>
                 <div className="menu">
                     <span>Moves: {moves}</span>
-                    <button onClick={() => initialize()}>Reset</button>
+                    <button onClick={() => initialize()}>Reset<Image src="/reset.svg" width={15} height={15} alt=""/></button>
                 </div>
             </div>
             
