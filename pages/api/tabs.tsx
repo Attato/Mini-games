@@ -1,63 +1,56 @@
 import React from 'react';
 import Head from 'next/head';
+
 import Memory from './memory';
 import Snake from './snake'
 import Chess from './chess';
 import Hangman from './hangman'
 
 const MemoryGame = (
-	<div key={Date.now()}>
+	<div className="body" key={Date.now()}>
 		<Head>
 			<title>Memory Game</title>
 			<meta name="description" content="" />
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 
-		<div className="body">
-			<Memory/>
-		</div>
+		<Memory/>
 	</div>
 );
 
 const SnakeGame = (
-	<div key={Date.now()}>
+	<div className="body" key={Date.now()}>
 		<Head>
 			<title>Snake</title>
 			<meta name="description" content="" />
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 
-		<div className="body">
-			<Snake/>
-		</div>
+		<Snake/>
 	</div>
 );
 
 const ChessGame = (
-	<div key={Date.now()}>
+	<div className="body" key={Date.now()}>
 		<Head>
 			<title>Chess</title>
 			<meta name="description" content="" />
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
-
-		<div className="body">
-			<Chess/>
-		</div>
+		
+		<Chess/>
 	</div>
 );
 
 const HangmanGame = (
-	<div key={Date.now()}>
+	<div className="body" key={Date.now()}>
 		<Head>
 			<title>Hangman</title>
 			<meta name="description" content="" />
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 
-		<div className="body">
-			<Hangman/>
-		</div>
+		<Hangman/>
 	</div>
 );
 

@@ -9,12 +9,12 @@
 	min-height: 60px;
 	margin: 0 auto;
 	padding: 20px 0;
-	border-top: 1px solid #28292b;
+	border-top: 1px solid $border;
 	user-select: none;
 	position: sticky;
 	top: 0;
 	z-index: 1000;
-	background-color: #1011139e;
+	background-color: $main;
 	backdrop-filter: blur(10px);
 
 	.sub__column {
@@ -144,15 +144,11 @@
 				align-items: center;
 				color: #767676;
 
-				button {
-                    display: flex;
-                    align-items: center;
+				span {
+					color: $text;
 				}
 			}
-			span {
-				color: $text;
-			}
-
+			
 			button {
                 display: flex;
                 align-items: center;
@@ -175,6 +171,14 @@
 			height: calc(72px * 8);
 			display: flex;
 			flex-wrap: wrap;
+
+			.black {
+				background-color: #b58863;
+			}
+
+			.white {
+				background-color: #f0d9b5;
+			}
 
 			.cell {
 				width: 72px;
@@ -205,69 +209,49 @@
 					width: 72px !important;
 					position: relative;
 				}
+
+				.selected {
+					background-color: #81914f;
+				}
+	
+				.available {
+					width: 12px;
+					height: 12px;
+					border-radius: 50%;
+					background-color: #81914f;
+				}
+	
+				.target {
+					position: absolute;
+					width: 72px;
+					height: 72px;
+					background: radial-gradient(
+						transparent 0%,
+						transparent 79%,
+						rgba(20, 85, 0, 0.3) 80%
+					);
+				}
 			}
-
-			.black {
-				background-color: #b58863;
-			}
-
-			.white {
-				background-color: #f0d9b5;
-			}
-
-			.selected {
-				background-color: #81914f;
-			}
-
-			.available {
-				width: 12px;
-				height: 12px;
-				border-radius: 50%;
-				background-color: #81914f;
-			}
-
-			.target {
-				position: absolute;
-				width: 72px;
-				height: 72px;
-				background: radial-gradient(
-					transparent 0%,
-					transparent 79%,
-					rgba(20, 85, 0, 0.3) 80%
-				);
-			}
-		}
-
-		.score {
-			display: flex;
-			padding: 5px;
-			color: #767676;
-			margin-bottom: 20px;
-
-			span {
-				width: 46px !important;
-				height: 46px !important;
-			}
-		}
-
-		.active {
-			color: #25a53d;
 		}
 
 		.first_player {
 			display: flex;
 			justify-content: flex-end;
 		}
-
+		
 		.second_player {
 			display: flex;
 			justify-content: flex-start;
 		}
-
+		
 		.time {
 			margin: 0;
 			font-size: 25px;
 			width: 4ch;
+		}
+
+		.active {
+			color: #25a53d;
 		}
 	}
 
@@ -387,9 +371,9 @@
                     }
 				}
 			}
-            
 		}
 
+		// popup wrap flex
         .flex {
             display: flex;
         }

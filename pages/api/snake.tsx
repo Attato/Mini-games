@@ -350,7 +350,7 @@ const Snake = () => {
 
                     <button onClick={startGame}>
                     {
-                        running ? <div className="btn">Restart game <Image src="/reset.svg" width={15} height={15} alt=""/></div> : <div className="btn">Start game <Image src="/start.svg" width={15} height={15} alt=""/></div>
+                        running ? <div className="btn">Restart game <Image src="/reset.svg" width={15} height={15} alt=""/></div> : <div className="btn">Start game <Image  src="/start.svg" width={15} height={15} alt=""/></div>
                     }
                     </button>
                 </div>
